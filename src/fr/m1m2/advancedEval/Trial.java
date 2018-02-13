@@ -2,6 +2,7 @@ package fr.m1m2.advancedEval;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.Date;
 
 import fr.lri.swingstates.canvas.*;
@@ -113,6 +114,47 @@ public class Trial {
 	public void displayMainScene(int oc) {
 		Canvas canvas = experiment.getCanvas();
 		canvas.addKeyListener(spaceListener);
+
+//		//int targetIndex = (int)Math.min(Math.random() * objectCount, objectCount-1);
+//		int small = 30;
+//		int large = 60;
+//		Color light = Color.LIGHT_GRAY;
+//		Color dark = Color.DARK_GRAY;
+//
+//		ArrayList<CShape> allShapes = new ArrayList<>(CShape);
+//
+//		//Target shape
+//		int targetSize = small;
+//		Color targetColor = light;
+//		CShape targetShape = null;
+//		targetSize = Math.random() > 0.5 ? large : small;
+//		targetColor = Math.random() > 0.5 ? dark : light;
+//		targetShape = new CEllipse(0, 0, targetSize, targetSize);
+//		targetShape.setFillPaint(targetColor);
+//
+//		//Other shapes
+//		if(visualVariable.equals("VV1")){
+//			size = targetSize == small ? large : small;
+//			color = targetColor;
+//			for (int i = 0; i < objectCount-1; i++) {
+//				object = new CEllipse(0, 0, size, size);
+//				object.setFillPaint(color);
+//			}
+//		} else if (visualVariable.equals("VV2")) {
+//
+//		} else if (visualVariable.equals("VV1VV2")) {
+//
+//		}
+//
+//		//there are at least six object in the list at this point
+//		for(int i = 6; i <(objectCount-1); i++) {
+//			size = Math.random() > 0.5 ? small : small * 2;
+//			if(size == targetSize) {
+//
+//			}
+//		}
+
+
 		makeShapes(oc);
 	}
 
@@ -132,24 +174,38 @@ public class Trial {
 		Canvas canvas = experiment.getCanvas();
 		objectCount = oc;
 
+
 		int small = 10;
 		int medium = 20;
 		int large = 30;
-		int x = 0;
-		int y = 0;
+
+		int xCoord = 0;
+		int yCoord = 0;
+		int row = 0;
+		int col = 0;
 
 		CRectangle storeShapes[] = new CRectangle[objectCount];
-		for (int i = 0; i < objectCount; i++) {
-			//storeShapes[i] = createShape (x,y);
-			x = x+50;
-			y = y+50;
-			canvas.addShape(createShape(x,y));
+
+		//TODO add random number and pick which one of the shapes that is the target
+		// 6 Participants!
+
+		if (objectCount % 2 == 0) {
+			row = objectCount/2;
+			col = objectCount/2;
+		} else {
+			row = Math.round(objectCount/2);
+			col = objectCount-row;
+			System.out.println("Row: "+ row + "Col: " + col);
 		}
 
-
-
-		//Rectangle
-
+		for (int x = 0; x <= row; x++) {
+			xCoord= xCoord+50;
+			for (int y = 0; y <= col; y++) {
+				yCoord= yCoord+50;
+				//canvas.addShape(createShape(xCoord,yCoord));
+			}
+			canvas.addShape(createShape(xCoord,yCoord));
+		}
 
 	}
 
@@ -165,6 +221,7 @@ public class Trial {
 		CRectangle shape = new CRectangle(x, y, 20, 30);
 		shape.setFillPaint(Color.BLUE);
 		//shape.addTag(visualMarks)
+
 		return shape;
 	}
 	
