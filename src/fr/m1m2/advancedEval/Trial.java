@@ -3,6 +3,7 @@ package fr.m1m2.advancedEval;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 import fr.lri.swingstates.canvas.*;
@@ -21,9 +22,12 @@ public class Trial {
 
 	
 	protected Experiment experiment;
-	
+
+	protected CExtensionalTag visualMark = new CExtensionalTag() { };
+	protected CExtensionalTag target = new CExtensionalTag() { };
 	protected CExtensionalTag instructions = new CExtensionalTag() { };
 	protected CExtensionalTag targetTag = new CExtensionalTag() { };
+	protected CExtensionalTag placeholders = new CExtensionalTag() { };
 	
 	public Trial(Experiment experiment, boolean practice, int block, int trial, String visualVariable, int objectCount) {
 		this.practice = practice;
@@ -47,24 +51,26 @@ public class Trial {
 			}
 		};
 
+	//Participant presses space when he detects the outlier object
 	private KeyListener spaceListener = new KeyAdapter() {
 		public void keyPressed(KeyEvent e) {
 			if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 				Canvas canvas = experiment.getCanvas();
 				canvas.removeKeyListener(spaceListener);
-				hideMainScene();
+//				hideMainScene();
+				displayPlaceHolders();
 
 				System.out.println("SPACE PRESSED: " + objectCount);
 				displayPlaceHolders();
+				canvas.addMouseListener(mouseListener);
 			}
 		}
 	};
 
+	//Used to confirm that the participant saw the right shape after pressing space
 	private MouseListener mouseListener = new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("Mouse Clicked: " + e.getX() + e.getY());
-				hidePlaceHolders();
-				//remove clicklistener
 				CShape picked = experiment.getCanvas().pick(e.getPoint());
 				if (picked != null ) {
 					//There is a shape under the cursor
@@ -115,56 +121,143 @@ public class Trial {
 		Canvas canvas = experiment.getCanvas();
 		canvas.addKeyListener(spaceListener);
 
-//		//int targetIndex = (int)Math.min(Math.random() * objectCount, objectCount-1);
-//		int small = 30;
-//		int large = 60;
-//		Color light = Color.LIGHT_GRAY;
-//		Color dark = Color.DARK_GRAY;
-//
-//		ArrayList<CShape> allShapes = new ArrayList<>(CShape);
-//
-//		//Target shape
-//		int targetSize = small;
-//		Color targetColor = light;
-//		CShape targetShape = null;
-//		targetSize = Math.random() > 0.5 ? large : small;
-//		targetColor = Math.random() > 0.5 ? dark : light;
-//		targetShape = new CEllipse(0, 0, targetSize, targetSize);
-//		targetShape.setFillPaint(targetColor);
-//
-//		//Other shapes
-//		if(visualVariable.equals("VV1")){
-//			size = targetSize == small ? large : small;
-//			color = targetColor;
-//			for (int i = 0; i < objectCount-1; i++) {
-//				object = new CEllipse(0, 0, size, size);
-//				object.setFillPaint(color);
-//			}
-//		} else if (visualVariable.equals("VV2")) {
-//
-//		} else if (visualVariable.equals("VV1VV2")) {
-//
-//		}
-//
-//		//there are at least six object in the list at this point
-//		for(int i = 6; i <(objectCount-1); i++) {
-//			size = Math.random() > 0.5 ? small : small * 2;
-//			if(size == targetSize) {
-//
-//			}
-//		}
+		// STEP 2 [begin]
+		int targetIndex = (int)Math.min(Math.random() * objectCount, objectCount-1);
+		int small = 30;
+		int large = 60;
+		Color light = Color.LIGHT_GRAY;
+		Color dark = Color.DARK_GRAY;
+
+		ArrayList<CShape> allShapes = new ArrayList<CShape>();
+
+		// TARGET SHAPE
+		int targetSize = small;
+		Color targetColor = light;
+		CShape targetShape = null;
+		targetSize = Math.random() > 0.5 ? large : small;
+		targetColor = Math.random() > 0.5 ? dark : light;
+		targetShape = new CEllipse(0, 0, targetSize, targetSize);
+		targetShape.setFillPaint(targetColor);
+
+		// OTHER SHAPES
+		CEllipse object;
+		int size;
+		Color color;
+		if(visualVariable.equals("VV1")) {
+			// size, all other shapes have a different size from the target, and have the same color than the target
+			size = targetSize == small ? large : small;
+			color = targetColor;
+			for(int i = 0; i < objectCount-1; i++) {
+				object = new CEllipse(0, 0, size, size);
+				object.setFillPaint(color);
+				allShapes.add(object);
+			}
+		} else if(visualVariable.equals("VV2")) {
+			// color, all other shapes have the same size than the target, and have a different color from the target
+			size = targetSize;
+			color = targetColor == dark ? light : dark;
+			for(int i = 0; i < objectCount-1; i++) {
+				object = new CEllipse(0, 0, size, size);
+				object.setFillPaint(color);
+				allShapes.add(object);
+			}
+		} else if(visualVariable.equals("VV1VV2")) {
+			// we have to ensure that only the target should be different from all the other shapes
+			// this means that we have to ensure that there is at least two identical objects of each type:
+			// {same size, different color}, {different size, same color}, {different size, different color}
+
+			// at least two objects have the same size and a different color
+			color = targetColor == dark ? light : dark;
+			size = targetSize;
+			for(int i = 0; i < 2; i++) {
+				object = new CEllipse(0, 0, size, size);
+				object.setFillPaint(color);
+				allShapes.add(object);
+			}
+			// at least two objects have the same color and a different size
+			size = targetSize == small ? large : small;
+			color = targetColor;
+			for(int i = 0; i < 2; i++) {
+				object = new CEllipse(0, 0, size, size);
+				object.setFillPaint(color);
+				allShapes.add(object);
+			}
+			// at least two objects have a different color and a different size
+			size = targetSize == small ? large : small;
+			color = targetColor == dark ? light : dark;
+			for(int i = 0; i < 2; i++) {
+				object = new CEllipse(0, 0, size, size);
+				object.setFillPaint(color);
+				allShapes.add(object);
+			}
+			// there are at least six objects in the list at this point
+			for(int i = 6; i < (objectCount-1); i++) {
+				size = Math.random() > 0.5 ? small : small * 2;
+				if(size == targetSize) {
+					color = targetColor == dark ? light : dark;
+				} else {
+					color = Math.random() > 0.5 ? light : dark;
+				}
+				object = new CEllipse(0, 0, size, size);
+				object.setFillPaint(color);
+				allShapes.add(object);
+			}
+		}
+
+		Collections.shuffle(allShapes);
+		allShapes.add(targetIndex, targetShape);
+
+		// LAYOUT
+		int cellSize = 100;
+		int count = 0;
+		for(int i = 0; i < Math.sqrt(objectCount); i++) {
+			for(int j = 0; j < Math.sqrt(objectCount); j++) {
+
+				// add the shape itself
+				CShape sh = allShapes.get(count);
+				canvas.addShape(sh);
+				if(count == targetIndex)  {
+					sh.addTag(target);
+
+				}
+				sh.addTag(visualMark);
+				sh.translateTo(i*cellSize, j*cellSize);
+
+				// Draw placeholder behind the place where the mark will appear
+				CRectangle placeholder = canvas.newRectangle(i*cellSize, j*cellSize, (20), (20));
+				placeholder.translateBy(-10, -10);
+				placeholder.setFillPaint(Color.lightGray);
+				placeholder.setOutlined(false);
+				placeholder.addTag(placeholders);
+
+				count++;
+			}
+		}
+
+		canvas.translateBy(canvas.getWidth()/2 - visualMark.getCenterX(), canvas.getHeight()/2 - visualMark.getCenterY());
+		// STEP 2 [end]
 
 
-		makeShapes(oc);
+		//makeShapes(oc);
 	}
 
 	public void displayPlaceHolders() {
+		Canvas canvas = experiment.getCanvas();
+		canvas.removeShapes(visualMark);
+
+		// Set the target market to transparent
+		CShape targetMark = canvas.getFirstHavingTag(target);
+		targetMark.setFilled(false);
+
 		//TODO
 	}
 
-	public void hideMainScene() {
-		//TODO
-	}
+//	public void hideMainScene() {
+//		Canvas canvas = experiment.getCanvas();
+//		canvas.removeShapes(visualMark);
+//
+//		displayPlaceHolders();
+//	}
 
 	public void hidePlaceHolders () {
 		//TODO
@@ -189,22 +282,49 @@ public class Trial {
 		//TODO add random number and pick which one of the shapes that is the target
 		// 6 Participants!
 
-		if (objectCount % 2 == 0) {
-			row = objectCount/2;
-			col = objectCount/2;
-		} else {
-			row = Math.round(objectCount/2);
-			col = objectCount-row;
-			System.out.println("Row: "+ row + "Col: " + col);
-		}
+//		if (objectCount % 2 == 0) {
+//			row = objectCount/2;
+//			col = objectCount/2;
+//		} else {
+//			row = Math.round(objectCount/2);
+//			col = objectCount-row;
+//			System.out.println("Row: "+ row + "Col: " + col);
+//		}
 
-		for (int x = 0; x <= row; x++) {
-			xCoord= xCoord+50;
-			for (int y = 0; y <= col; y++) {
-				yCoord= yCoord+50;
-				//canvas.addShape(createShape(xCoord,yCoord));
+
+		ArrayList<CShape> shapeList = new ArrayList<>();
+
+		// Paint them on the canvas
+		double sqrtObjectCount = Math.sqrt(objectCount);
+		int gridWidth = (int) (canvas.getWidth() / (sqrtObjectCount+1));
+		int gridHeight = (int) (canvas.getHeight() / (sqrtObjectCount+1));
+
+		// For each of the required shapes, run through the list and draw them in a grid
+		for(int x = gridWidth, y = gridHeight, i = 0; i < shapeList.size(); i++, x += gridWidth) {
+
+			// if end of row then go to next row and reset to column 1
+			if (x >= canvas.getWidth() - 20) {
+				x = gridWidth;
+				y += gridHeight;
 			}
-			canvas.addShape(createShape(xCoord,yCoord));
+
+			// Draw ghost behind the place where the mark will appear
+//			CRectangle ghost = canvas.newRectangle(x, y, (20), (20));
+//			ghost.translateBy(-10, -10);
+//			ghost.setFillPaint(Color.lightGray);
+//			ghost.setOutlined(false);
+//			ghost.addTag(ghosts);
+
+			// Move to the correct location and add to canvas
+			shapeList.get(i).translateTo(x, y);
+			canvas.addShape(shapeList.get(i));
+
+			// Add tag
+//			CRectangle currentMark = (CRectangle) shapeList.get(i);
+//			currentMark.addTag(visualMarks);
+//			currentMark.setOutlined(false);
+
+
 		}
 
 	}
