@@ -136,6 +136,9 @@ public class Trial {
 	public void displayMainScene(int oc) {
 		Canvas canvas = experiment.getCanvas();
 		canvas.addKeyListener(spaceListener);
+		System.out.println(visualVariable);
+		System.out.println(block);
+		System.out.println(trial);
 
 		// Record time that the user gets to start looking at images
 		timeStop = new Date();
