@@ -144,18 +144,19 @@ public class Trial {
 		int targetIndex = (int)Math.min(Math.random() * objectCount, objectCount-1);
 		int small = 30;
 		int large = 60;
-		Color light = Color.LIGHT_GRAY;
-		Color dark = Color.DARK_GRAY;
+		//Color light = Color.LIGHT_GRAY;
+		//Color dark = Color.DARK_GRAY;
 
 		ArrayList<CShape> allShapes = new ArrayList<CShape>();
 //		ArrayList<CShape> placeHolders = new ArrayList<CShape>();
 
 		// TARGET SHAPE
 		int targetSize = small;
-		Color targetColor = light;
+		int rotate = 0;
+		//Color targetColor = light;
 		CShape targetShape = null;
 		targetSize = Math.random() > 0.5 ? large : small;
-		targetColor = Math.random() > 0.5 ? dark : light;
+		//targetColor = Math.random() > 0.5 ? dark : light;
 		//targetShape = new CEllipse(0, 0, targetSize, targetSize);
 		//targetShape.setFillPaint(targetColor);
 		//targetShape = new CEllipse(0, 0, targetSize, targetSize);
@@ -168,25 +169,27 @@ public class Trial {
 //		CEllipse object;
 		CRectangle object;
 		int size;
-		Color color;
+		//Color color;
 		if(visualVariable.equals("VV1")) {
-			// size, all other shapes have a different size from the target, and have the same color than the target
+			// size, all other shapes have a different size from the target, and have the same orientation than the target
 			size = targetSize == small ? large : small;
-			color = targetColor;
+			//color = targetColor;
 			for(int i = 0; i < objectCount-1; i++) {
 //				object = new CEllipse(0, 0, size, size);
 				object = new CRectangle(0,0,size,size);
-				object.setFillPaint(color);
+				//object.setFillPaint(color);
+				object.rotateBy(45);
 				allShapes.add(object);
 			}
 		} else if(visualVariable.equals("VV2")) {
-			// color, all other shapes have the same size than the target, and have a different color from the target
+			// color, all other shapes have the same size than the target, and have a different orientation from the target
 			size = targetSize;
-			color = targetColor == dark ? light : dark;
+			System.out.println("I am here");
+			//color = targetColor == dark ? light : dark;
 			for(int i = 0; i < objectCount-1; i++) {
 //				object = new CEllipse(0, 0, size, size);
 				object = new CRectangle(0,0,size,size);
-				object.setFillPaint(color);
+				//object.setFillPaint(color);
 				allShapes.add(object);
 			}
 		} else if(visualVariable.equals("VV1VV2")) {
@@ -194,44 +197,47 @@ public class Trial {
 			// this means that we have to ensure that there is at least two identical objects of each type:
 			// {same size, different color}, {different size, same color}, {different size, different color}
 
-			// at least two objects have the same size and a different color
-			color = targetColor == dark ? light : dark;
+			// at least two objects have the same size and a different orientation
+			//color = targetColor == dark ? light : dark;
 			size = targetSize;
 			for(int i = 0; i < 2; i++) {
 //				object = new CEllipse(0, 0, size, size);
 				object = new CRectangle(0,0,size,size);
-				object.setFillPaint(color);
+				//object.setFillPaint(color);
 				allShapes.add(object);
 			}
-			// at least two objects have the same color and a different size
+			// at least two objects have the same orientation and a different size
 			size = targetSize == small ? large : small;
-			color = targetColor;
+			//color = targetColor;
 			for(int i = 0; i < 2; i++) {
 //				object = new CEllipse(0, 0, size, size);
 				object = new CRectangle(0,0,size,size);
-				object.setFillPaint(color);
+				object.rotateBy(45);
 				allShapes.add(object);
 			}
 			// at least two objects have a different color and a different size
 			size = targetSize == small ? large : small;
-			color = targetColor == dark ? light : dark;
+			//color = targetColor == dark ? light : dark;
 			for(int i = 0; i < 2; i++) {
 //				object = new CEllipse(0, 0, size, size);
 				object = new CRectangle(0,0,size,size);
-				object.setFillPaint(color);
+				object.rotateBy(45);
 				allShapes.add(object);
 			}
 			// there are at least six objects in the list at this point
 			for(int i = 6; i < (objectCount-1); i++) {
 				size = Math.random() > 0.5 ? small : small * 2;
 				if(size == targetSize) {
-					color = targetColor == dark ? light : dark;
+					//color = targetColor == dark ? light : dark;
+					rotate = 20;
 				} else {
-					color = Math.random() > 0.5 ? light : dark;
+					//color = Math.random() > 0.5 ? light : dark;
+					rotate = Math.random() > 0.5 ? 70 : 30;
 				}
 //				object = new CEllipse(0, 0, size, size);
 				object = new CRectangle(0,0,size,size);
-				object.setFillPaint(color);
+				//object.setFillPaint(color);
+				object.rotateBy(rotate);
 				allShapes.add(object);
 			}
 		}
