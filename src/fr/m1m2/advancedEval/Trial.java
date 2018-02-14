@@ -2,6 +2,7 @@ package fr.m1m2.advancedEval;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -16,19 +17,17 @@ public class Trial {
 	protected int trial;
 	protected String visualVariable;
 	protected int objectCount;
-
-	protected Date timerStart;
-	protected Date timerStop;
-
 	
 	protected Experiment experiment;
 
 	protected CExtensionalTag visualMark = new CExtensionalTag() { };
 	protected CExtensionalTag target = new CExtensionalTag() { };
 	protected CExtensionalTag instructions = new CExtensionalTag() { };
-	protected CExtensionalTag targetTag = new CExtensionalTag() { };
 	protected CExtensionalTag placeholders = new CExtensionalTag() { };
-	
+
+	protected Date timeStart;
+	protected Date timeStop;
+
 	public Trial(Experiment experiment, boolean practice, int block, int trial, String visualVariable, int objectCount) {
 		this.practice = practice;
 		this.block = block;
@@ -43,7 +42,9 @@ public class Trial {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					Canvas canvas = experiment.getCanvas();
 					canvas.removeKeyListener(enterListener);
+
 					hideInstructions();
+
 					displayMainScene(objectCount);
 
 					System.out.println("ENTER PRESSED: " + objectCount);
@@ -57,8 +58,9 @@ public class Trial {
 			if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 				Canvas canvas = experiment.getCanvas();
 				canvas.removeKeyListener(spaceListener);
-//				hideMainScene();
-				displayPlaceHolders();
+
+				// Log time that the space bar was hit. This is the moment they noticed the correct mark.
+				timeStart = new Date();
 
 				System.out.println("SPACE PRESSED: " + objectCount);
 				displayPlaceHolders();
@@ -70,16 +72,30 @@ public class Trial {
 	//Used to confirm that the participant saw the right shape after pressing space
 	private MouseListener mouseListener = new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("Mouse Clicked: " + e.getX() + e.getY());
 				CShape picked = experiment.getCanvas().pick(e.getPoint());
+
 				if (picked != null ) {
-					//There is a shape under the cursor
-					if (picked.hasTag(targetTag)) {
-						//There is a shape tagged with targetTag
-						//under the cursor
+					if (picked.hasTag(target)) {
+						System.out.println("You clicked the target:" + e.getSource());
+
+						// 1. Log the time taken to hit the space-bar after the image has been displayed (difference in ms)
+						long reactionTime = timeStart.getTime() - timeStop.getTime();
+						System.out.println("User reaction time is: " + reactionTime);
+						exitLog(reactionTime);
+
+						// 2. Remove the transparent target from the screen
+						hidePlaceHolders();
+
+						// Continue to next trial
+						experiment.nextTrial();
+
+
+					} else {
+						//restart
+						hidePlaceHolders();
+						displayMainScene(objectCount);
 					}
 				}
-				//experiment.nextTrial();
 			}
 	};
 
@@ -121,6 +137,9 @@ public class Trial {
 		Canvas canvas = experiment.getCanvas();
 		canvas.addKeyListener(spaceListener);
 
+		// Record time that the user gets to start looking at images
+		timeStop = new Date();
+
 		// STEP 2 [begin]
 		int targetIndex = (int)Math.min(Math.random() * objectCount, objectCount-1);
 		int small = 30;
@@ -129,6 +148,7 @@ public class Trial {
 		Color dark = Color.DARK_GRAY;
 
 		ArrayList<CShape> allShapes = new ArrayList<CShape>();
+//		ArrayList<CShape> placeHolders = new ArrayList<CShape>();
 
 		// TARGET SHAPE
 		int targetSize = small;
@@ -136,11 +156,17 @@ public class Trial {
 		CShape targetShape = null;
 		targetSize = Math.random() > 0.5 ? large : small;
 		targetColor = Math.random() > 0.5 ? dark : light;
-		targetShape = new CEllipse(0, 0, targetSize, targetSize);
-		targetShape.setFillPaint(targetColor);
+		//targetShape = new CEllipse(0, 0, targetSize, targetSize);
+		//targetShape.setFillPaint(targetColor);
+		//targetShape = new CEllipse(0, 0, targetSize, targetSize);
+		targetShape = new CRectangle(0, 0, targetSize, targetSize);
+		//targetShape.setFillPaint(targetColor);
+		targetShape.rotateBy(45);
+
 
 		// OTHER SHAPES
-		CEllipse object;
+//		CEllipse object;
+		CRectangle object;
 		int size;
 		Color color;
 		if(visualVariable.equals("VV1")) {
@@ -148,7 +174,8 @@ public class Trial {
 			size = targetSize == small ? large : small;
 			color = targetColor;
 			for(int i = 0; i < objectCount-1; i++) {
-				object = new CEllipse(0, 0, size, size);
+//				object = new CEllipse(0, 0, size, size);
+				object = new CRectangle(0,0,size,size);
 				object.setFillPaint(color);
 				allShapes.add(object);
 			}
@@ -157,7 +184,8 @@ public class Trial {
 			size = targetSize;
 			color = targetColor == dark ? light : dark;
 			for(int i = 0; i < objectCount-1; i++) {
-				object = new CEllipse(0, 0, size, size);
+//				object = new CEllipse(0, 0, size, size);
+				object = new CRectangle(0,0,size,size);
 				object.setFillPaint(color);
 				allShapes.add(object);
 			}
@@ -170,7 +198,8 @@ public class Trial {
 			color = targetColor == dark ? light : dark;
 			size = targetSize;
 			for(int i = 0; i < 2; i++) {
-				object = new CEllipse(0, 0, size, size);
+//				object = new CEllipse(0, 0, size, size);
+				object = new CRectangle(0,0,size,size);
 				object.setFillPaint(color);
 				allShapes.add(object);
 			}
@@ -178,7 +207,8 @@ public class Trial {
 			size = targetSize == small ? large : small;
 			color = targetColor;
 			for(int i = 0; i < 2; i++) {
-				object = new CEllipse(0, 0, size, size);
+//				object = new CEllipse(0, 0, size, size);
+				object = new CRectangle(0,0,size,size);
 				object.setFillPaint(color);
 				allShapes.add(object);
 			}
@@ -186,7 +216,8 @@ public class Trial {
 			size = targetSize == small ? large : small;
 			color = targetColor == dark ? light : dark;
 			for(int i = 0; i < 2; i++) {
-				object = new CEllipse(0, 0, size, size);
+//				object = new CEllipse(0, 0, size, size);
+				object = new CRectangle(0,0,size,size);
 				object.setFillPaint(color);
 				allShapes.add(object);
 			}
@@ -198,7 +229,8 @@ public class Trial {
 				} else {
 					color = Math.random() > 0.5 ? light : dark;
 				}
-				object = new CEllipse(0, 0, size, size);
+//				object = new CEllipse(0, 0, size, size);
+				object = new CRectangle(0,0,size,size);
 				object.setFillPaint(color);
 				allShapes.add(object);
 			}
@@ -213,22 +245,25 @@ public class Trial {
 		for(int i = 0; i < Math.sqrt(objectCount); i++) {
 			for(int j = 0; j < Math.sqrt(objectCount); j++) {
 
+				// Draw placeholder behind the place where the mark will appear
+				CRectangle placeholder = canvas.newRectangle(i*cellSize, j*cellSize, (20), (20));
+//				placeholder.translateBy(-10, -10);
+				placeholder.setFillPaint(Color.lightGray);
+				placeholder.setFilled(false);
+				placeholder.setOutlined(false);
+				placeholder.addTag(placeholders);
+
 				// add the shape itself
 				CShape sh = allShapes.get(count);
+
 				canvas.addShape(sh);
 				if(count == targetIndex)  {
 					sh.addTag(target);
+					placeholder.addTag(target);
 
 				}
 				sh.addTag(visualMark);
 				sh.translateTo(i*cellSize, j*cellSize);
-
-				// Draw placeholder behind the place where the mark will appear
-				CRectangle placeholder = canvas.newRectangle(i*cellSize, j*cellSize, (20), (20));
-				placeholder.translateBy(-10, -10);
-				placeholder.setFillPaint(Color.lightGray);
-				placeholder.setOutlined(false);
-				placeholder.addTag(placeholders);
 
 				count++;
 			}
@@ -237,112 +272,62 @@ public class Trial {
 		canvas.translateBy(canvas.getWidth()/2 - visualMark.getCenterX(), canvas.getHeight()/2 - visualMark.getCenterY());
 		// STEP 2 [end]
 
-
-		//makeShapes(oc);
 	}
 
 	public void displayPlaceHolders() {
 		Canvas canvas = experiment.getCanvas();
 		canvas.removeShapes(visualMark);
 
-		// Set the target market to transparent
-		CShape targetMark = canvas.getFirstHavingTag(target);
-		targetMark.setFilled(false);
-
-		//TODO
+		placeholders.setFilled(true);
 	}
-
-//	public void hideMainScene() {
-//		Canvas canvas = experiment.getCanvas();
-//		canvas.removeShapes(visualMark);
-//
-//		displayPlaceHolders();
-//	}
 
 	public void hidePlaceHolders () {
-		//TODO
-	}
-
-	public void makeShapes(int oc) {
 		Canvas canvas = experiment.getCanvas();
-		objectCount = oc;
+		canvas.removeShapes(target);
+
+		canvas.removeMouseListener(mouseListener);
+		canvas.removeShapes(placeholders);
+	}
+
+	protected void exitLog(long reactionTime) {
+		long currentTime = new Date().getTime();
+		// Open logfile
+		PrintWriter pwLog = experiment.getPwLog();
+
+		System.out.println(pwLog);
+//		try(FileWriter fw = new FileWriter("experiment_results.csv", true);
+//			BufferedWriter bw = new BufferedWriter(fw); PrintWriter out = new PrintWriter(bw);)
+//		try {
+			System.out.println("Writing to file Block: " + block);
+
+//			String header =
+//							experiment.getParticipant() + "\t"
+//							+ block + "\t"
+//							+ trial + "\t"
+//							+ visualVariable + "\t"
+//							+ objectCount + "\t"
+//							+ reactionTime + "\n";
+			String header = currentTime + "\t"
+					+ experiment.getParticipant()+ "\t"
+					+ block + "\t"
+					+ trial+ "\t"
+					+"Difficulty\t"
+					+"Device\t"
+					+ reactionTime + "\t"
+					+"Error\t"
+					+"Practice\n";
 
 
-		int small = 10;
-		int medium = 20;
-		int large = 30;
+			pwLog.print(header);
+			pwLog.flush();
 
-		int xCoord = 0;
-		int yCoord = 0;
-		int row = 0;
-		int col = 0;
-
-		CRectangle storeShapes[] = new CRectangle[objectCount];
-
-		//TODO add random number and pick which one of the shapes that is the target
-		// 6 Participants!
-
-//		if (objectCount % 2 == 0) {
-//			row = objectCount/2;
-//			col = objectCount/2;
-//		} else {
-//			row = Math.round(objectCount/2);
-//			col = objectCount-row;
-//			System.out.println("Row: "+ row + "Col: " + col);
 //		}
-
-
-		ArrayList<CShape> shapeList = new ArrayList<>();
-
-		// Paint them on the canvas
-		double sqrtObjectCount = Math.sqrt(objectCount);
-		int gridWidth = (int) (canvas.getWidth() / (sqrtObjectCount+1));
-		int gridHeight = (int) (canvas.getHeight() / (sqrtObjectCount+1));
-
-		// For each of the required shapes, run through the list and draw them in a grid
-		for(int x = gridWidth, y = gridHeight, i = 0; i < shapeList.size(); i++, x += gridWidth) {
-
-			// if end of row then go to next row and reset to column 1
-			if (x >= canvas.getWidth() - 20) {
-				x = gridWidth;
-				y += gridHeight;
-			}
-
-			// Draw ghost behind the place where the mark will appear
-//			CRectangle ghost = canvas.newRectangle(x, y, (20), (20));
-//			ghost.translateBy(-10, -10);
-//			ghost.setFillPaint(Color.lightGray);
-//			ghost.setOutlined(false);
-//			ghost.addTag(ghosts);
-
-			// Move to the correct location and add to canvas
-			shapeList.get(i).translateTo(x, y);
-			canvas.addShape(shapeList.get(i));
-
-			// Add tag
-//			CRectangle currentMark = (CRectangle) shapeList.get(i);
-//			currentMark.addTag(visualMarks);
-//			currentMark.setOutlined(false);
-
-
-		}
-
+//		catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//			System.out.println("Could not open log file.");
+//
+//		}
 	}
 
-	//TODO FOR THE PLACEHOLDERS
-	//setDrawable(false)
-	//setPickable(true)
 
-	//setDrawable(true)
-	//setPickable(false)
-
-	// Create shapes for adding to list
-	protected CRectangle createShape(int x, int y) {
-		CRectangle shape = new CRectangle(x, y, 20, 30);
-		shape.setFillPaint(Color.BLUE);
-		//shape.addTag(visualMarks)
-
-		return shape;
-	}
-	
 }

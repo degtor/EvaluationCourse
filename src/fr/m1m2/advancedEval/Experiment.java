@@ -27,6 +27,7 @@ public class Experiment {
 	protected String participant = "";
 	protected int block = -1;
 	protected int trial = -1;
+	protected PrintWriter pwLog;
 
 	protected File designFile = null;
 
@@ -92,10 +93,10 @@ public class Experiment {
 	}
 
 	public void initLog() {
-		String logFileName = "log_S"+participant+"_"+System.currentTimeMillis()+".csv";
+		String logFileName = "log_S"+participant+"XXXXX_"+System.currentTimeMillis()+".csv";
 		File logFile = new File(logFileName);
 		try {
-			PrintWriter pwLog = new PrintWriter(logFile);
+			pwLog = new PrintWriter(logFile);
 			String header = "Time\t"
 					+"Participant\t"
 					+"Block\t"
@@ -136,6 +137,10 @@ public class Experiment {
 	
 	public String getParticipant() {
 		return participant;
+	}
+
+	public PrintWriter getPwLog() {
+		return pwLog;
 	}
 
 	public void setParticipant(String participant) {

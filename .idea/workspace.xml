@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="690e1808-7e50-45b6-80af-3d5d1a72b39a" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/fr/m1m2/advancedEval/Trial$8.class" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/fr/m1m2/advancedEval/Trial$5.class" afterPath="$PROJECT_DIR$/bin/fr/m1m2/advancedEval/Trial$5.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/fr/m1m2/advancedEval/Trial$6.class" afterPath="$PROJECT_DIR$/bin/fr/m1m2/advancedEval/Trial$6.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/fr/m1m2/advancedEval/Trial$7.class" afterPath="$PROJECT_DIR$/bin/fr/m1m2/advancedEval/Trial$7.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/fr/m1m2/advancedEval/Trial.class" afterPath="$PROJECT_DIR$/bin/fr/m1m2/advancedEval/Trial.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fr/m1m2/advancedEval/Experiment.java" afterPath="$PROJECT_DIR$/src/fr/m1m2/advancedEval/Experiment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fr/m1m2/advancedEval/Trial.java" afterPath="$PROJECT_DIR$/src/fr/m1m2/advancedEval/Trial.java" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -22,28 +27,50 @@
       <file leaf-file-name="Experiment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/fr/m1m2/advancedEval/Experiment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2835">
-              <caret line="225" column="35" lean-forward="false" selection-start-line="225" selection-start-column="35" selection-end-line="225" selection-end-column="35" />
+            <state relative-caret-position="91">
+              <caret line="95" column="55" lean-forward="false" selection-start-line="95" selection-start-column="55" selection-end-line="95" selection-end-column="55" />
+              <folding>
+                <element signature="e#3317#3318#0" expanded="true" />
+                <element signature="e#3342#3343#0" expanded="true" />
+                <element signature="e#3376#3377#0" expanded="true" />
+                <element signature="e#3395#3396#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="log_S0XXXXX_1518616959084.csv" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/log_S0XXXXX_1518616959084.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Trial.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="log_S2_1518518648943.csv" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/log_S2_1518518648943.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Trial.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/fr/m1m2/advancedEval/Trial.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="215" column="39" lean-forward="true" selection-start-line="215" selection-start-column="39" selection-end-line="215" selection-end-column="39" />
+            <state relative-caret-position="347">
+              <caret line="316" column="30" lean-forward="true" selection-start-line="316" selection-start-column="30" selection-end-line="316" selection-end-column="30" />
               <folding>
-                <element signature="e#1168#1499#0" expanded="true" />
-                <element signature="e#1498#1499#0" expanded="true" />
-                <element signature="e#1603#1986#0" expanded="true" />
-                <element signature="e#1985#1986#0" expanded="true" />
-                <element signature="e#2109#2529#0" expanded="true" />
-                <element signature="e#2528#2529#0" expanded="true" />
-                <element signature="method#makeShapes#0;class#Trial#0" expanded="false" />
-                <element signature="e#10261#10288#0" expanded="false" />
-                <element signature="method#createShape#0;class#Trial#0" expanded="false" />
+                <element signature="e#1116#1449#0" expanded="true" />
+                <element signature="e#1448#1449#0" expanded="true" />
+                <element signature="e#1553#2009#0" expanded="true" />
+                <element signature="e#2008#2009#0" expanded="true" />
+                <element signature="e#2132#2926#0" expanded="true" />
+                <element signature="e#2925#2926#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -59,16 +86,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="experiment.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/experiment.csv">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="45" lean-forward="false" selection-start-line="0" selection-start-column="45" selection-end-line="0" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
@@ -77,8 +94,11 @@
       <find>currentTrial</find>
       <find>allTrial</find>
       <find>stop</find>
-      <find>target</find>
       <find>hidemain</find>
+      <find>visualmark</find>
+      <find>target</find>
+      <find>block</find>
+      <find>allshapes</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -92,8 +112,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/fr/m1m2/advancedEval/Experiment.java" />
         <option value="$PROJECT_DIR$/src/fr/m1m2/advancedEval/Trial.java" />
+        <option value="$PROJECT_DIR$/src/fr/m1m2/advancedEval/Experiment.java" />
       </list>
     </option>
   </component>
@@ -103,8 +123,8 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="width" value="1440" />
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+    <option name="width" value="718" />
     <option name="height" value="900" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -288,15 +308,15 @@
       <option name="presentableId" value="Default" />
       <updated>1518516565705</updated>
       <workItem from="1518516575133" duration="15925000" />
-      <workItem from="1518598897880" duration="3999000" />
+      <workItem from="1518598897880" duration="9853000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19924000" />
+    <option name="totallyTimeSpent" value="25778000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -308,11 +328,11 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17661692" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37064677" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329602" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.249226" sideWeight="0.4920635" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24892704" sideWeight="0.4920635" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -343,7 +363,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#3317#3318#0" expanded="true" />
+            <element signature="e#3342#3343#0" expanded="true" />
+            <element signature="e#3376#3377#0" expanded="true" />
+            <element signature="e#3395#3396#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -352,15 +377,12 @@
         <state relative-caret-position="2850">
           <caret line="196" column="22" lean-forward="false" selection-start-line="196" selection-start-column="22" selection-end-line="196" selection-end-column="22" />
           <folding>
-            <element signature="e#1168#1499#0" expanded="true" />
-            <element signature="e#1498#1499#0" expanded="true" />
-            <element signature="e#1603#1986#0" expanded="true" />
-            <element signature="e#1985#1986#0" expanded="true" />
-            <element signature="e#2109#2529#0" expanded="true" />
-            <element signature="e#2528#2529#0" expanded="true" />
-            <element signature="method#makeShapes#0;class#Trial#0" expanded="false" />
-            <element signature="e#10261#10288#0" expanded="false" />
-            <element signature="method#createShape#0;class#Trial#0" expanded="false" />
+            <element signature="e#1116#1449#0" expanded="true" />
+            <element signature="e#1448#1449#0" expanded="true" />
+            <element signature="e#1553#2009#0" expanded="true" />
+            <element signature="e#2008#2009#0" expanded="true" />
+            <element signature="e#2132#2926#0" expanded="true" />
+            <element signature="e#2925#2926#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -373,10 +395,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/fr/m1m2/advancedEval/Experiment.java">
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home/src.zip!/java/awt/event/KeyAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2835">
-          <caret line="225" column="35" lean-forward="false" selection-start-line="225" selection-start-column="35" selection-end-line="225" selection-end-column="35" />
+        <state relative-caret-position="97">
+          <caret line="39" column="56" lean-forward="false" selection-start-line="39" selection-start-column="56" selection-end-line="39" selection-end-column="56" />
           <folding />
         </state>
       </provider>
@@ -397,21 +419,63 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/log_S0_1518518401248.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/log_S0_1518518794749.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/fr/m1m2/advancedEval/Trial.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="215" column="39" lean-forward="true" selection-start-line="215" selection-start-column="39" selection-end-line="215" selection-end-column="39" />
+        <state relative-caret-position="347">
+          <caret line="316" column="30" lean-forward="true" selection-start-line="316" selection-start-column="30" selection-end-line="316" selection-end-column="30" />
           <folding>
-            <element signature="e#1168#1499#0" expanded="true" />
-            <element signature="e#1498#1499#0" expanded="true" />
-            <element signature="e#1603#1986#0" expanded="true" />
-            <element signature="e#1985#1986#0" expanded="true" />
-            <element signature="e#2109#2529#0" expanded="true" />
-            <element signature="e#2528#2529#0" expanded="true" />
-            <element signature="method#makeShapes#0;class#Trial#0" expanded="false" />
-            <element signature="e#10261#10288#0" expanded="false" />
-            <element signature="method#createShape#0;class#Trial#0" expanded="false" />
+            <element signature="e#1116#1449#0" expanded="true" />
+            <element signature="e#1448#1449#0" expanded="true" />
+            <element signature="e#1553#2009#0" expanded="true" />
+            <element signature="e#2008#2009#0" expanded="true" />
+            <element signature="e#2132#2926#0" expanded="true" />
+            <element signature="e#2925#2926#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fr/m1m2/advancedEval/Experiment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="95" column="55" lean-forward="false" selection-start-line="95" selection-start-column="55" selection-end-line="95" selection-end-column="55" />
+          <folding>
+            <element signature="e#3317#3318#0" expanded="true" />
+            <element signature="e#3342#3343#0" expanded="true" />
+            <element signature="e#3376#3377#0" expanded="true" />
+            <element signature="e#3395#3396#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/log_S0XXXXX_1518616959084.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/log_S2_1518518648943.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
