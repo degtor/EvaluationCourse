@@ -119,6 +119,7 @@ public class Experiment {
 		}
 		Trial trial = allTrials.get(currentTrial);
 		trial.displayInstructions();
+		currentTrial++;
 
 	}
 

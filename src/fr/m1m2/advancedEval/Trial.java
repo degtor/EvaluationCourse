@@ -37,6 +37,8 @@ public class Trial {
 		this.experiment = experiment;
 	}
 
+
+
 	private KeyListener enterListener = new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -47,7 +49,6 @@ public class Trial {
 
 					displayMainScene(objectCount);
 
-					System.out.println("ENTER PRESSED: " + objectCount);
 				}
 			}
 		};
@@ -62,7 +63,6 @@ public class Trial {
 				// Log time that the space bar was hit. This is the moment they noticed the correct mark.
 				timeStart = new Date();
 
-				System.out.println("SPACE PRESSED: " + objectCount);
 				displayPlaceHolders();
 				canvas.addMouseListener(mouseListener);
 			}
@@ -78,15 +78,12 @@ public class Trial {
 					if (picked.hasTag(target)) {
 						System.out.println("You clicked the target:" + e.getSource());
 
-						// 1. Log the time taken to hit the space-bar after the image has been displayed (difference in ms)
 						long reactionTime = timeStart.getTime() - timeStop.getTime();
 						System.out.println("User reaction time is: " + reactionTime);
 						exitLog(reactionTime);
 
-						// 2. Remove the transparent target from the screen
 						hidePlaceHolders();
 
-						// Continue to next trial
 						experiment.nextTrial();
 
 
@@ -140,6 +137,8 @@ public class Trial {
 		System.out.println(block);
 		System.out.println(trial);
 
+		System.out.println("I am visual Variable: " + visualVariable);
+
 		// Record time that the user gets to start looking at images
 		timeStop = new Date();
 
@@ -151,7 +150,6 @@ public class Trial {
 		//Color dark = Color.DARK_GRAY;
 
 		ArrayList<CShape> allShapes = new ArrayList<CShape>();
-//		ArrayList<CShape> placeHolders = new ArrayList<CShape>();
 
 		// TARGET SHAPE
 		int targetSize = small;
@@ -177,6 +175,7 @@ public class Trial {
 			// size, all other shapes have a different size from the target, and have the same orientation than the target
 			size = targetSize == small ? large : small;
 			//color = targetColor;
+			System.out.println("I am VV1");
 			for(int i = 0; i < objectCount-1; i++) {
 //				object = new CEllipse(0, 0, size, size);
 				object = new CRectangle(0,0,size,size);
@@ -187,7 +186,7 @@ public class Trial {
 		} else if(visualVariable.equals("VV2")) {
 			// color, all other shapes have the same size than the target, and have a different orientation from the target
 			size = targetSize;
-			System.out.println("I am here");
+			System.out.println("I am VV2");
 			//color = targetColor == dark ? light : dark;
 			for(int i = 0; i < objectCount-1; i++) {
 //				object = new CEllipse(0, 0, size, size);
@@ -196,6 +195,7 @@ public class Trial {
 				allShapes.add(object);
 			}
 		} else if(visualVariable.equals("VV1VV2")) {
+			System.out.println("I am VV1VV2");
 			// we have to ensure that only the target should be different from all the other shapes
 			// this means that we have to ensure that there is at least two identical objects of each type:
 			// {same size, different color}, {different size, same color}, {different size, different color}
@@ -300,22 +300,10 @@ public class Trial {
 
 	protected void exitLog(long reactionTime) {
 		long currentTime = new Date().getTime();
-		// Open logfile
 		PrintWriter pwLog = experiment.getPwLog();
 
-		System.out.println(pwLog);
-//		try(FileWriter fw = new FileWriter("experiment_results.csv", true);
-//			BufferedWriter bw = new BufferedWriter(fw); PrintWriter out = new PrintWriter(bw);)
-//		try {
 			System.out.println("Writing to file Block: " + block);
 
-//			String header =
-//							experiment.getParticipant() + "\t"
-//							+ block + "\t"
-//							+ trial + "\t"
-//							+ visualVariable + "\t"
-//							+ objectCount + "\t"
-//							+ reactionTime + "\n";
 			String header = currentTime + "\t"
 					+ experiment.getParticipant()+ "\t"
 					+ block + "\t"
@@ -330,12 +318,6 @@ public class Trial {
 			pwLog.print(header);
 			pwLog.flush();
 
-//		}
-//		catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//			System.out.println("Could not open log file.");
-//
-//		}
 	}
 
 
