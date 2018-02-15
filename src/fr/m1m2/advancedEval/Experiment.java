@@ -64,7 +64,7 @@ public class Experiment {
 
 	public void loadTrials() {
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(new File("experiment.csv")));
+			BufferedReader br = new BufferedReader(new FileReader(new File("experiments.csv")));
 			String line = br.readLine();
 			String[] parts = line.split(",");
 			line = br.readLine();
@@ -101,8 +101,8 @@ public class Experiment {
 					+"Participant\t"
 					+"Block\t"
 					+"Trial\t"
-					+"Difficulty\t"
-					+"Device\t"
+					+"ObjectCount\t"
+					+"VVChange\t"
 					+"CompletionTime\t"
 					+"Error\t"
 					+"Practice\n";
