@@ -133,19 +133,14 @@ public class Trial {
 	public void displayMainScene(int oc) {
 		Canvas canvas = experiment.getCanvas();
 		canvas.addKeyListener(spaceListener);
-		System.out.println(visualVariable);
-		System.out.println(block);
-		System.out.println(trial);
-
-		System.out.println("I am visual Variable: " + visualVariable);
-
 		// Record time that the user gets to start looking at images
 		timeStop = new Date();
 
 		// STEP 2 [begin]
 		int targetIndex = (int)Math.min(Math.random() * objectCount, objectCount-1);
-		int small = 30;
-		int large = 60;
+		int small = 20;
+		int large = 40;
+		int recFactor = 20;
 		//Color light = Color.LIGHT_GRAY;
 		//Color dark = Color.DARK_GRAY;
 
@@ -161,7 +156,7 @@ public class Trial {
 		//targetShape = new CEllipse(0, 0, targetSize, targetSize);
 		//targetShape.setFillPaint(targetColor);
 		//targetShape = new CEllipse(0, 0, targetSize, targetSize);
-		targetShape = new CRectangle(0, 0, targetSize, targetSize);
+		targetShape = new CRectangle(0, 0, targetSize, targetSize+recFactor);
 		//targetShape.setFillPaint(targetColor);
 		targetShape.rotateBy(45);
 
@@ -175,10 +170,9 @@ public class Trial {
 			// size, all other shapes have a different size from the target, and have the same orientation than the target
 			size = targetSize == small ? large : small;
 			//color = targetColor;
-			System.out.println("I am VV1");
 			for(int i = 0; i < objectCount-1; i++) {
 //				object = new CEllipse(0, 0, size, size);
-				object = new CRectangle(0,0,size,size);
+				object = new CRectangle(0,0,size,size+recFactor);
 				//object.setFillPaint(color);
 				object.rotateBy(45);
 				allShapes.add(object);
@@ -186,16 +180,15 @@ public class Trial {
 		} else if(visualVariable.equals("VV2")) {
 			// color, all other shapes have the same size than the target, and have a different orientation from the target
 			size = targetSize;
-			System.out.println("I am VV2");
 			//color = targetColor == dark ? light : dark;
 			for(int i = 0; i < objectCount-1; i++) {
 //				object = new CEllipse(0, 0, size, size);
-				object = new CRectangle(0,0,size,size);
+				object = new CRectangle(0,0,size,size+recFactor);
 				//object.setFillPaint(color);
 				allShapes.add(object);
 			}
 		} else if(visualVariable.equals("VV1VV2")) {
-			System.out.println("I am VV1VV2");
+			//System.out.println("I am VV1VV2");
 			// we have to ensure that only the target should be different from all the other shapes
 			// this means that we have to ensure that there is at least two identical objects of each type:
 			// {same size, different color}, {different size, same color}, {different size, different color}
@@ -205,7 +198,7 @@ public class Trial {
 			size = targetSize;
 			for(int i = 0; i < 2; i++) {
 //				object = new CEllipse(0, 0, size, size);
-				object = new CRectangle(0,0,size,size);
+				object = new CRectangle(0,0,size,size+recFactor);
 				//object.setFillPaint(color);
 				allShapes.add(object);
 			}
@@ -214,33 +207,33 @@ public class Trial {
 			//color = targetColor;
 			for(int i = 0; i < 2; i++) {
 //				object = new CEllipse(0, 0, size, size);
-				object = new CRectangle(0,0,size,size);
+				object = new CRectangle(0,0,size,size+recFactor);
 				object.rotateBy(45);
 				allShapes.add(object);
 			}
-			// at least two objects have a different color and a different size
+			// at least two objects have a different orientation and a different size
 			size = targetSize == small ? large : small;
 			//color = targetColor == dark ? light : dark;
 			for(int i = 0; i < 2; i++) {
 //				object = new CEllipse(0, 0, size, size);
-				object = new CRectangle(0,0,size,size);
+				object = new CRectangle(0,0,size,size+recFactor);
 				object.rotateBy(45);
 				allShapes.add(object);
 			}
 			// there are at least six objects in the list at this point
 			for(int i = 6; i < (objectCount-1); i++) {
-				size = Math.random() > 0.5 ? small : small * 2;
-				if(size == targetSize) {
+				//size = Math.random() > 0.5 ? small : small * 2;
+				/* :if(size == targetSize) {
 					//color = targetColor == dark ? light : dark;
-					rotate = 20;
+					rotate = 10;
 				} else {
 					//color = Math.random() > 0.5 ? light : dark;
-					rotate = Math.random() > 0.5 ? 70 : 30;
-				}
+					rotate = Math.random() > 0.5 ? 80 : 20;
+				}  */
 //				object = new CEllipse(0, 0, size, size);
-				object = new CRectangle(0,0,size,size);
+				object = new CRectangle(0,0,size,size+recFactor);
 				//object.setFillPaint(color);
-				object.rotateBy(rotate);
+				object.rotateBy(10);
 				allShapes.add(object);
 			}
 		}
@@ -255,9 +248,9 @@ public class Trial {
 			for(int j = 0; j < Math.sqrt(objectCount); j++) {
 
 				// Draw placeholder behind the place where the mark will appear
-				CRectangle placeholder = canvas.newRectangle(i*cellSize, j*cellSize, (20), (20));
+				CEllipse placeholder = canvas.newEllipse(i*cellSize, j*cellSize, (30), (30));
 //				placeholder.translateBy(-10, -10);
-				placeholder.setFillPaint(Color.lightGray);
+				placeholder.setFillPaint(Color.RED);
 				placeholder.setFilled(false);
 				placeholder.setOutlined(false);
 				placeholder.addTag(placeholders);
@@ -306,13 +299,13 @@ public class Trial {
 
 			String header = currentTime + "\t"
 					+ experiment.getParticipant()+ "\t"
-					+ block + "\t"
-					+ trial+ "\t"
-					+"Difficulty\t"
-					+"Device\t"
-					+ reactionTime + "\t"
-					+"Error\t"
-					+"Practice\n";
+					+ block + " \t"
+					+ trial + " \t"
+					+"Difficulty \t"
+					+"Device \t"
+					+ reactionTime + "ms\t"
+					+""
+					+"Practice \n";
 
 
 			pwLog.print(header);
