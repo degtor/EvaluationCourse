@@ -27,6 +27,7 @@ public class Trial {
 
 	protected Date timeStart;
 	protected Date timeStop;
+	protected int errors;
 
 	public Trial(Experiment experiment, boolean practice, int block, int trial, String visualVariable, int objectCount) {
 		this.practice = practice;
@@ -76,6 +77,7 @@ public class Trial {
 
 				if (picked != null ) {
 					if (picked.hasTag(target)) {
+						errors = 0;
 						System.out.println("You clicked the target:" + e.getSource());
 
 						long reactionTime = timeStart.getTime() - timeStop.getTime();
@@ -90,6 +92,7 @@ public class Trial {
 					} else {
 						//restart
 						hidePlaceHolders();
+						errors++;
 						displayMainScene(objectCount);
 					}
 				}
@@ -304,7 +307,7 @@ public class Trial {
 					+"Difficulty \t"
 					+"Device \t"
 					+ reactionTime + "ms\t"
-					+""
+					+errors + "\t"
 					+"Practice \n";
 
 
